@@ -10,15 +10,19 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                // Install dependencies if you have any, like using pip
                 bat 'python -m pip install -r requirements.txt'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                bat 'python -m unittest discover -s . -p "test.py"'  // Run all tests from test.py
             }
         }
 
         stage('Run Script') {
             steps {
-                // Adjusting the path to main.py if it's inside the 'app' folder
-                bat 'python app\\main.py'
+                bat 'python app\\main.py'  // Start the app if necessary
             }
         }
     }
@@ -33,3 +37,4 @@ pipeline {
         }
     }
 }
+
